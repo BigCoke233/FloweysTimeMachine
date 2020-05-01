@@ -1,7 +1,7 @@
 # 小花的时间机器
 > Undertale 存档编辑器
 
-这个项目的原仓库是：http://crumblingstatue.github.io/FloweysTimeMachine
+这个项目的原仓库是：https://github.com/crumblingstatue/FloweysTimeMachine
 
 我对这个工具进行了汉化，方便中文圈的 Undertale 厨们使用，稍微优化了一下界面（虽然还是很丑）。目前翻译还不是很完善，比如物品和帮助文档没有翻译完整，其中还可能有些错误（主要是 Undertale 的有些物品都找不到对应的中文名），如果可以的话，希望能协助我进行翻译。同时，我也打算找时间对界面进行进一步的优化。
 
