@@ -1,0 +1,25 @@
+body {
+    background-color: black;
+    color: white;
+	line-height: 1.5
+}
+
+form {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+form fieldset {
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+	color: #cccccc;
+	text-decoration: none
+}
+
+.page-container {
+	max-width: 930px;
+	margin: 0 auto
+}

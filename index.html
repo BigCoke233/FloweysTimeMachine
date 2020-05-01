@@ -1,0 +1,184 @@
+<!doctype html>
+<html manifest="manifest.appcache">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="description" content="A save editor for Undertale." />
+        <meta name="keywords" content="Undertale,save,editor" />
+        <title>小花的时间机器</title>
+        <script src="lib/FileSaver.min.js"></script>
+        <script src="presets/presets.js"></script>
+        <script src="presets/ruins-start.js"></script>
+        <script src="presets/sans-battle.js"></script>
+        <script src="presets/Undyne%20The%20Undying.js"></script>
+        <script src="presets/Asgore%20(normal).js"></script>
+        <script src="presets/Asgore%20(true%20ending).js"></script>
+        <script src="presets/Omega%20Flowey.js"></script>
+        <script src="presets/True%20Pacifist%20Ending.js"></script>
+        <script src="main.js"></script>
+        <link rel="stylesheet" type="text/css" href="style.css" />
+    </head>
+    <body>
+	  <div class="page-container">
+		<br>
+        <h1 style="text-align:center"><img style="margin: 0 auto;display:block" src="res/flowey_nice.png" alt="" id="floweyimg" /><br>小花的时间机器</h1>
+        <p style="text-align: center;">
+            <a href="help.html" target="_blank">帮助文档</a>&emsp;<a href="https://github.com/BigCoke233/FloweysTimeMachine" target="_blank">GitHub</a>
+        </p>
+		<br>
+        <label>内置预设</label><select id="builtinpresetselect"> </select>
+        <input type="button" id="builtinpresetload" value="加载" />
+		<br>
+        <label>你的预设</label><select id="userpresetselect"> </select>
+        <input type="button" id="userpresetload" value="加载" disabled />
+        <input type="button" id="userpresetsave" value="保存" disabled />
+        <input type="button" id="userpresetnew" value="新建" />
+        <input type="button" id="userpresetdelete" value="删除" disabled />
+        <input type="button" id="userpresetexport" value="保存并导出" disabled />
+		<br>
+        <label>静音 <small>(屏蔽保存存档数据之后 Flowey 发出的可怕笑声)</small></label><input type="checkbox" id="mute" />
+        <h2>持续性设置</h2>
+        <p>Undertale 人物在多周目中都会记住的事情。</p>
+        <form>
+            <div>
+                <fieldset>
+                    <legend>undertale.ini</legend>
+                    <input type="file" id="ini-file" />
+                    <div>
+                        <input id="ini-loadbutton" type="button" value="加载" disabled />
+                        <input type="button" id="ini-savebutton" value="保存" />
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>普通</legend>
+                    <label>名字</label> <input id="ini-name" type="text" />
+                    <label>位置</label> <select id="ini-location"> </select>
+                    <label>击杀数量</label> <input id="ini-kills" type="text" />
+                    <label>LOVE（暴力指数）</label> <input id="ini-love" type="text" />
+                </fieldset>
+            </div>
+            <fieldset>
+                <legend>屠杀线之后</legend>
+                <label>system_information_962<sup title="当这个文件存在时, 这个世界处于屠杀线之后的'删除状态'">[?]</sup> </label> <input type="button" id="savesi2" value="保存" />
+                <label>system_information_963<sup title="当这个文件存在时, 你已经向 Chara 出卖你的灵魂来换回这个世界">[?]</sup> </label> <input type="button" id="savesi3" value="保存" />
+            </fieldset>
+            <fieldset>
+                <legend>精污花（Omega Flowey）</legend>
+                <label>困在小花的世界里</label> <input type="checkbox" id="ini-omega-flowey-trapped" />
+                <label>即将到来的人类灵魂:</label> <select id="ini-omega-flowey-soul"></select>
+                <label>你死亡的次数</label> <input type="text" id="ini-omega-flowey-deaths" />
+            </fieldset>
+            <fieldset>
+                <legend>其他</legend>
+                <label>躲过了所有的特别鸣谢</label> <input type="checkbox" id="ini-dodged-all-special-thanks" />
+                <label>FUN 值</label> <input type="text" id="ini-fun" />
+            </fieldset>
+        </form>
+        <h2>存档数据</h2>
+        <p>这是你在存档点会保存的内容。</p>
+        <form>
+            <div>
+                <fieldset>
+                    <legend>file0</legend>
+                    <input type="file" id="sav-file" />
+                    <div>
+                        <input id="sav-loadbutton" type="button" value="加载" disabled />
+                        <input type="button" id="sav-savebutton" value="保存" />
+                    </div>
+                </fieldset>
+                <fieldset>
+                <legend>普通</legend>
+                <label>名字</label> <input type="text" id="sav-name" />
+                <label>位置</label> <select id="sav-location"> </select>
+                <label>击杀数</label> <input type="text" id="sav-kills" />
+                <label>??? (不知道做什么的)击杀数</label> <input type="text" id="sav-unkkills" />
+                </fieldset>
+                <fieldset>
+                <legend>状态</legend>
+                <label>LOVE (暴力指数)</label> <input type="text" id="sav-love" />
+                <label>HP (生命值)</label> <input type="text" id="sav-hp" />
+                <label>EXP (裁决点数)</label> <input type="text" id="sav-exp" />
+                <label>GOLD (金钱)</label> <input type="text" id="sav-gold" />
+                <label>AT (攻击)</label> <input type="text" id="sav-at" />
+                <label>Weapon AT (武器攻击)</label> <input type="text" id="sav-weaponat" />
+                <label>DF (防御)</label> <input type="text" id="sav-df" />
+                <label>Armor DF (护甲防御)</label> <input type="text" id="sav-armordf" />
+                </fieldset>
+            </div>
+            <div>
+            <fieldset>
+                <legend>装逼</legend>
+                <label>武器</label> <select id="sav-weapon"> </select>
+                <label>护甲</label> <select id="sav-armor"> </select>
+            </fieldset>
+            <fieldset>
+                <legend>物品</legend>
+                <label>格子 1</label> <select id="sav-invslot1"> </select>
+                <label>格子 2</label> <select id="sav-invslot2"> </select>
+                <label>格子 3</label> <select id="sav-invslot3"> </select>
+                <label>格子 4</label> <select id="sav-invslot4"> </select>
+                <label>格子 5</label> <select id="sav-invslot5"> </select>
+                <label>格子 6</label> <select id="sav-invslot6"> </select>
+                <label>格子 7</label> <select id="sav-invslot7"> </select>
+                <label>格子 8</label> <select id="sav-invslot8"> </select>
+            </fieldset>
+            <fieldset>
+                <legend>手机</legend>
+                <label>是否拥有手机</label> <input id="sav-havecell" type="checkbox" />
+                <label>格子 1</label> <select id="sav-cellslot1"> </select>
+                <label>格子 2</label> <select id="sav-cellslot2"> </select>
+                <label>格子 3</label> <select id="sav-cellslot3"> </select>
+                <label>格子 4</label> <select id="sav-cellslot4"> </select>
+                <label>格子 5</label> <select id="sav-cellslot5"> </select>
+                <label>格子 6</label> <select id="sav-cellslot6"> </select>
+                <label>格子 7</label> <select id="sav-cellslot7"> </select>
+                <label>格子 8</label> <select id="sav-cellslot8"> </select>
+            </fieldset>
+            </div>
+            <div>
+                <fieldset>
+                    <legend>遗迹（Ruins）</legend>
+                    <label>击杀数</label> <input type="text" id="sav-ruinskills" />
+                    <label>训练人偶(Dummy)的情况</label> <select id="sav-trainingdummystate"> </select>
+                    <label>托丽尔/羊妈(Toriel)的情况</label> <select id="sav-torielstate"> </select>
+                </fieldset>
+                <fieldset>
+                    <legend>雪镇（Snowdin)</legend>
+                    <label>击杀数</label> <input type="text" id="sav-snowdinkills" />
+                    <label>遁狗(Doggo)的情况</label> <select id="sav-doggostate"> </select>
+                    <label>狗夫妇(Dogamy & Dogaressa)的情况</label> <select id="sav-dogamydogaressastate"> </select>
+                    <label>大犬汪(Greater Dog)的情况</label> <select id="sav-greaterdogstate"> </select>
+                    <label><del>大概是</del>铁雪龙的儿子(Comedian)的情况</label> <select id="sav-comedianstate"> </select>
+                    <label>帕派瑞斯/小天使(Papyrus)的情况</label> <select id="sav-papyrusstate"> </select>
+                </fieldset>
+                <fieldset>
+                    <legend>瀑布（Waterfall）</legend>
+                    <label>击杀数</label> <input type="text" id="sav-waterfallkills" />
+                    <label>害羞塞壬(Shyren)的情况</label> <select id="sav-shyrenstate"> </select>
+                    <label>发疯的人偶/大表哥(Mad Dummy)的情况</label> <select id="sav-maddummystate"> </select>
+                    <label>安黛因/鱼姐(Undyne)的情况 1</label> <select id="sav-undynestate1"> </select>
+                    <label>安黛因/鱼姐(Undyne)的情况 2</label> <select id="sav-undynestate2"> </select>
+                </fieldset>
+                <fieldset>
+                    <legend>热域（Hotland）</legend>
+                    <label>击杀数</label> <input type="text" id="sav-hotlandkills" />
+                    <label>守卫好基友(Bro Guards)的情况</label> <select id="sav-broguardsstate"> </select>
+                    <label>蜘蛛玛菲特(Muffet)的情况</label> <select id="sav-muffetstate"> </select>
+                    <label>镁塔顿/马婷婷(Mettaton)的情况</label> <select id="sav-mettatonstate"> </select>
+                </fieldset>
+            </div>
+            <div>
+                <fieldset>
+                  <legend>其他</legend>
+                  <label>真·实验室开放(能否进行真和平结局)</label> <input id="sav-exitedtruelab" type="checkbox" />
+                  <label>打败了小羊(Asriel)(完成真和平结局) </label> <input id="sav-defeatedasriel" type="checkbox" />
+                  <label>Plot 值</label> <select id="sav-plotvalue"> </select>
+                  <label>FUN 值</label> <input type="text" id="sav-fun" />
+                </fieldset>
+            </div>
+        </form>
+		<br>
+		<p class="footer">Originally by <a href="https://github.com/crumblingstatue">crumblingstatue</a>, 
+		Chinese edition by <a href="https://github.com/BigCoke233">Eltrac</a>.</p>
+	  </div>
+    </body>
+</html>

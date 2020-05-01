@@ -1,0 +1,9 @@
+[package]
+name = "watcher"
+version = "0.1.0"
+authors = ["Mika Attila <radiantstatue@gmail.com>"]
+
+[dependencies]
+notify = "2.5.5"
+rust-ini = "0.9.4"
+ansi_term = "0.7.2"
